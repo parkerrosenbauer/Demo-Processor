@@ -1,0 +1,3 @@
+# ignore data and pycharm files
+*.pyc
+*.txt
