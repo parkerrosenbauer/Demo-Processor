@@ -1,0 +1,22 @@
+Good afternoon,
+
+Today’s SelectCoder product demo leads have been uploaded and updated in SF [] parent campaign and [] child campaign.
+
+SF Upload Breakdown:
+	- 1 excluded records with contact but no lead
+	- 1 dead attendees lead flipped to open
+	- 3 dead non-attendees excluded
+	- 9 converted leads in SF
+	- 5 active leads updated but not reassigned
+	- Remaining 10 leads assigned to Tony as requested
+
+SF TM Tracking:
+TWHIM1AC151– Attendee	        3
+TWHIM1BC149– Non-Attendee	12
+Total               15
+
+These records have also been uploaded to the UDB and will be validated tomorrow morning. 1 records were excluded for hitting up against the master suppression file or hitting up against the IsActiveFalse table.
+
+UDB Upload Tracking:
+UWHIM1AC153 – Attendee
+UWHIM1BC154 – Non-Attendee

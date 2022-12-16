@@ -1,0 +1,4 @@
+# ignore data and pycharm files
+*.json 
+*.csv
+*.pyc

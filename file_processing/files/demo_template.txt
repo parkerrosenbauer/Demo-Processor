@@ -1,0 +1,23 @@
+Good afternoon,
+
+Today’s [demo type] product demo leads have been uploaded and updated in SF [] parent campaign and [] child campaign.
+
+SF Upload Breakdown:
+	- [contact_no_lead] excluded records with contact but no lead
+	- [null_phone] records excluded with no phone
+	- [flipped_open] dead attendees lead flipped to open
+	- [left_dead] dead non-attendees excluded
+	- [converted] converted leads in SF
+	- [updated_leads] active leads updated but not reassigned
+	- Remaining [as_requested] leads assigned to [requested_assign] as requested
+
+SF TM Tracking:
+[tmattendee_code]– Attendee	        [tmattendee_count]
+[tmnonattendee_code]– Non-Attendee	[tmnonattendee_count]
+Total               [total]
+
+These records have also been uploaded to the UDB and will be validated tomorrow morning. [udb_excluded] records were excluded for hitting up against the master suppression file or hitting up against the IsActiveFalse table.
+
+UDB Upload Tracking:
+[attendee_code] – Attendee
+[nonattendee_code] – Non-Attendee
