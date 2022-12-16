@@ -2,9 +2,9 @@ from __future__ import annotations
 import json
 import datetime
 from logs.log import logger
+import file_processing.file_paths as const
 
-VALIDATION_COUNTS = r"\\CT-FS10\BLR_Share\Marketing\_Database " \
-                    r"Management\PRosenbauer\demo_automation\data\validation_counts.json "
+VALIDATION_COUNTS = const.VALIDATION_COUNTS
 
 
 class Validation:

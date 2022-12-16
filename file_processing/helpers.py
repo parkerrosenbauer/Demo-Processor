@@ -5,6 +5,7 @@ from win32com.client import constants, gencache
 from logs.log import logger
 import file_processing.demo as demo
 import file_processing.constants as demo_c
+import file_processing.file_paths as const
 
 pd.io.formats.excel.ExcelFormatter.header_style = None
 
@@ -18,9 +19,7 @@ def initial_counts(demo_obj: demo.Demo) -> None:
     :return: None
     :rtype: None
     """
-    internal_emails = ["@datacenterhawk.com", "@acdis.org", "@blr.com", "@bluepointleadership.com", "@ccmi.com",
-                       "@decisionhealth.com", "@h3.group", "@hci.org", "@hcpro.com", "@mleesmith.com",
-                       "@simplifycompliance.com", "@ucg.com"]
+    internal_emails = const.INTERNAL
     pattern = '|'.join(internal_emails)
 
     data = pd.read_excel(demo_c.RAW_DATA_PATH, sheet_name=demo_c.RAW_DATA_SHEET)
@@ -138,13 +137,7 @@ def sfdc_pre_val(demo_obj: demo.Demo) -> None:
     sfdc.loc[sfdc["Master Name"] == '', 'Company'] = 'REVIEW ' + sfdc.Company
     sfdc = sfdc.drop(['Master Name'], axis=1)
 
-    """cleans the secondary description of duplicates - note, it's not a perfect system and this field will need to 
-    be reviewed, but in essence, if a secondary description is X / Y / Z, it will compare there are no duplicated 
-    terms within X, then Y, then Z, then it will make sure that X does not equal Y and does not equal Z (and do the 
-    same for each other section) finally, it will make sure that X is not contained with Y or Z, if it is, 
-    X is removed for an example of the above line, if the description is "HCPro Library Card / Library Card", 
-    Library Card is within HCPro Library Card, so that is dropped, giving the result: "HCPro Library Card" """
-
+    # cleans the secondary description of duplicates
     def uniquify(string, splitter=" "):
         output = []
         seen = set()
@@ -534,8 +527,7 @@ def generate_email(demo_obj: demo.Demo) -> None:
     :return: None
     :rtype: None
     """
-    with open(r"\\CT-FS10\BLR_Share\Marketing\_Database "
-              r"Management\PRosenbauer\demo_automation\file_processing\files\demo_template.txt", 'r') as file:
+    with open(const.DEMO_TEMPLATE, 'r') as file:
         data = file.read()
 
         data = data.replace("[demo type]", demo_obj.demo_type)
@@ -543,17 +535,14 @@ def generate_email(demo_obj: demo.Demo) -> None:
         for item, value in demo_obj.counts.retrieve_all().items():
             data = data.replace(f"[{item}]", str(value))
 
-    with open(r"\\CT-FS10\BLR_Share\Marketing\_Database "
-              r"Management\PRosenbauer\demo_automation\file_processing\files\generated_email.txt", 'w') as file:
+    with open(const.EMAIL_TEMPLATE, 'w') as file:
         file.write(data)
 
-    with open(r"\\CT-FS10\BLR_Share\Marketing\_Database "
-              r"Management\PRosenbauer\demo_automation\file_processing\files\generated_email.txt", 'r+') as file:
+    with open(const.EMAIL_TEMPLATE, 'r+') as file:
         lines = file.readlines()
         file.seek(0)
         for line in lines:
             if "- 0 " not in line:
                 file.write(line)
         file.truncate()
-    os.startfile(r"\\CT-FS10\BLR_Share\Marketing\_Database "
-                 r"Management\PRosenbauer\demo_automation\file_processing\files\generated_email.txt")
+    os.startfile(const.EMAIL_TEMPLATE)

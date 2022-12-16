@@ -2,8 +2,9 @@ import os
 import pandas as pd
 from file_processing.demo import Demo
 import file_processing.constants as demo_c
+import file_processing.file_paths as const
 
-ARCHIVE_PATH = r'\\CT-FS10\BLR_Share\BI Reporting\LinkedExcelDocuments\UDBValidationArchive.xlsx'
+ARCHIVE_PATH = const.ARCHIVE_PATH
 COUNTS_SHEET = "Upload_Counts"
 UDB_SHEET = "UDB_Uploads"
 SFDC_SHEET = "SFDC_Uploads"

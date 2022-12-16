@@ -4,9 +4,10 @@ import pandas as pd
 import access_interface.access as access
 import file_processing.constants as demo_c
 import file_processing.validation as v
+import file_processing.file_paths as const
 from logs.log import logger
 
-DEMO_INFO_PATH = r"\\CT-FS10\BLR_Share\Marketing\_Database Management\PRosenbauer\demo_automation\data\Demo_Info.csv"
+DEMO_INFO_PATH = const.DEMO_INFO_PATH
 logger.debug(DEMO_INFO_PATH)
 DEMO_INFO = pd.read_csv(DEMO_INFO_PATH)
 
@@ -94,6 +95,4 @@ class Demo:
         cnxn.download_to_excel(self.sf_upload, self.sf_path)
         cnxn.download_to_excel(self.udb_upload, self.udb_path)
         cnxn.download_to_excel(self.udb_exclude, self.exclude_path)
-        cnxn.download_to_excel("No_Master_Org_Match", os.path.join(r"\\CT-FS10\BLR_Share\Marketing\_Database "
-                                                                   r"Management\PRosenbauer\UpdateMasterOrg",
-                                                                   f"{self.demo_date}.xlsx"))
+        cnxn.download_to_excel("No_Master_Org_Match", os.path.join(const.MASTER_FLDR, f"{self.demo_date}.xlsx"))
