@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb9f61ca-017d-495e-9892-a7b187eb4114" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file_processing/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/file_processing/helpers.py" afterDir="false" />
-    </list>
+    <list default="true" id="bb9f61ca-017d-495e-9892-a7b187eb4114" name="Changes" comment="Removing references to sync field and changing the pivot table to use lead source field instead" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +52,14 @@
       <option name="presentableId" value="Default" />
       <updated>1664972326287</updated>
     </task>
+    <task id="LOCAL-00001" summary="Removing references to sync field and changing the pivot table to use lead source field instead">
+      <created>1671475858055</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1671475858055</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -67,5 +72,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Removing references to sync field and changing the pivot table to use lead source field instead" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing references to sync field and changing the pivot table to use lead source field instead" />
   </component>
 </project>
