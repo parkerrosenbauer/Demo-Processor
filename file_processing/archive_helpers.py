@@ -51,6 +51,11 @@ def sfdc_counts(demo_obj: demo.Demo) -> None:
                                   a_null_phone=nullphone[0],
                                   na_null_phone=nullphone[1])
 
+    # sf count if non-attendees are excluded
+    if int(demo_obj.counts.retrieve_one("tmnonattendee_count")) == 0 \
+            and int(demo_obj.counts.retrieve_one("sf_excluded") > 0):
+        demo_obj.counts.update_counts(tmnonattendee_count=demo_obj.counts.retrieve_one("sf_excluded"))
+
 
 def udb_counts(demo_obj: demo.Demo) -> None:
     """Updates the udb demo counts for the archive.

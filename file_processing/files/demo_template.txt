@@ -3,6 +3,7 @@ Good afternoon,
 Today’s [demo type] product demo leads have been uploaded and updated in SF [] parent campaign and [] child campaign.
 
 SF Upload Breakdown:
+    - [sf_excluded] excluded non-attendees
 	- [contact_no_lead] excluded records with contact but no lead
 	- [null_phone] records excluded with no phone
 	- [flipped_open] dead attendees lead flipped to open
