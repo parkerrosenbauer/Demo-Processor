@@ -60,10 +60,10 @@ def sfdc_counts(demo_obj: demo.Demo) -> None:
 def udb_counts(demo_obj: demo.Demo) -> None:
     """Updates the udb demo counts for the archive.
 
-    :param demo_obj:
-    :type demo_obj:
-    :return:
-    :rtype:
+    :param demo_obj: Demo object
+    :type demo_obj: Demo
+    :return: None
+    :rtype: None
     """
     udb = attend_nonattend_counts(demo_obj.udb_path, demo_obj.udb_upload, "TrackingCode")
     exclude = pd.read_excel(demo_obj.exclude_path, sheet_name=demo_obj.udb_exclude)
