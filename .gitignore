@@ -3,3 +3,6 @@
 *.csv
 *.pyc
 *.txt
+*.bat
+ENV_DIR/
+logs/log.txt
