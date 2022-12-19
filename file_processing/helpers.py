@@ -246,9 +246,9 @@ def sfdc_pre_val(demo_obj: demo.Demo) -> None:
             "pt_num": 4,
             "pt_row": 2,
             "pt_col": 4,
-            "pt_rows": ['Silverpop Sync', 'Email'],
+            "pt_rows": ['Current Lead Status', 'Email'],
             "pt_filters": [],
-            "pt_fields": [['Silverpop Sync', 'Count of Silverpop Sync', -4112]]
+            "pt_fields": [['Current Lead Status', 'Count of Current Lead Status', -4112]]
         }
     ]
 
@@ -409,9 +409,9 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
 
     # contact update
     contact_cols = ['Existing Lead ID', 'LastName', 'FirstName', 'Email', 'Domain', 'State', 'PhoneNumber', 'Company',
-                    'Existing Lead Company', 'CustomerTitle', 'AG',
-                    'Silverpop Sync', 'Record Type ID', 'LeadSource', 'Current Lead Status', 'Dead Reason',
-                    'Current Owner', 'Current Owner ID', 'Dead Reason', 'PhoneExt']
+                    'Existing Lead Company', 'CustomerTitle', 'AG', 'Record Type ID', 'LeadSource',
+                    'Current Lead Status', 'Dead Reason', 'EmailValidation', 'Current Owner', 'Current Owner ID',
+                    'Dead Reason', 'PhoneExt']
     for col in contact_cols:
         try:
             contact_update = contact_update.drop([col], axis=1)
