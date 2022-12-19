@@ -365,13 +365,13 @@ class DemoFrame(tk.Frame):
             return
 
         # archive upload counts
-        # try:
-        demo_a.sfdc_counts(self.demo_obj)
-        demo_a.udb_counts(self.demo_obj)
-        self.archive_obj.append_counts()
-        # except Exception as e:
-        #     messagebox.showerror("Archive Error", str(e))
-        #     logger.error("Archive Error %s", repr(e))
+        try:
+            demo_a.sfdc_counts(self.demo_obj)
+            demo_a.udb_counts(self.demo_obj)
+            self.archive_obj.append_counts()
+        except Exception as e:
+            messagebox.showerror("Archive Error", str(e))
+            logger.error("Archive Error %s", repr(e))
 
         messagebox.showinfo("Archive Completed", "All data has been archived.")
 
