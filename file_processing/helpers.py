@@ -190,11 +190,21 @@ def sfdc_pre_val(demo_obj: demo.Demo) -> None:
                  "Prior Lead Status",
                  "LastActivityDate", "Existing Lead Owner", "Existing Lead Owner ID", "ID"], axis=1, inplace=True)
 
+    # counts any excluded sf leads
+    try:
+        exclude = pd.read_excel(demo_obj.sf_exclude_path, sheet_name=demo_obj.sf_exclude)
+    except FileNotFoundError:
+        logger.warning("There was no sf exclude file")
+        excluded = 0
+    else:
+        excluded = len(exclude)
+
     # update validation counts
     demo_obj.counts.update_counts(left_dead=len(dead),
                                   flipped_open=len(demo_obj.flip_to_open),
                                   null_phone=len(null_phone),
-                                  contact_no_lead=len(cnl))
+                                  contact_no_lead=len(cnl),
+                                  sf_excluded=excluded)
 
     # reformat the Excel file and separates it into the correct sheets
     with pd.ExcelWriter(demo_obj.sf_path, engine='openpyxl', mode='w') as writer:

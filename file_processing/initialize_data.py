@@ -53,6 +53,7 @@ def initialize() -> None:
         "converted": 0,
         "udb_excluded": 0,
         "udb_uploaded": 0,
+        "sf_excluded": 0,
     }
     demo_id = [
         f"{row['Demo Type']} ({row['Webinar Date']})"

@@ -299,20 +299,21 @@ class DemoFrame(tk.Frame):
 
         # sfdc counts
         tk.Label(win, text="SFDC").grid(column=0, row=2)
-        tk.Label(win, text=f"null_phone: {counts['null_phone']}").grid(column=0, row=3, sticky=tk.W, padx=5)
-        tk.Label(win, text=f"contact_no_lead: {counts['contact_no_lead']}").grid(column=0, row=4, sticky=tk.W, padx=5)
-        tk.Label(win, text=f"left_dead: {counts['left_dead']}").grid(column=0, row=5, sticky=tk.W, padx=5)
-        tk.Label(win, text=f"converted: {counts['converted']}").grid(column=0, row=6, sticky=tk.W, padx=5)
-        tk.Label(win, text=f"updated_leads: {counts['updated_leads']}").grid(column=0, row=7, sticky=tk.W, padx=5)
-        tk.Label(win, text=f"as_requested: {counts['as_requested']}").grid(column=0, row=8, sticky=tk.W, padx=5)
+        tk.Label(win, text=f"excluded: {counts['sf_excluded']}").grid(column=0, row=3, sticky=tk.W, padx=5)
+        tk.Label(win, text=f"null_phone: {counts['null_phone']}").grid(column=0, row=4, sticky=tk.W, padx=5)
+        tk.Label(win, text=f"contact_no_lead: {counts['contact_no_lead']}").grid(column=0, row=5, sticky=tk.W, padx=5)
+        tk.Label(win, text=f"left_dead: {counts['left_dead']}").grid(column=0, row=6, sticky=tk.W, padx=5)
+        tk.Label(win, text=f"converted: {counts['converted']}").grid(column=0, row=7, sticky=tk.W, padx=5)
+        tk.Label(win, text=f"updated_leads: {counts['updated_leads']}").grid(column=0, row=8, sticky=tk.W, padx=5)
+        tk.Label(win, text=f"as_requested: {counts['as_requested']}").grid(column=0, row=9, sticky=tk.W, padx=5)
 
         sfdc_total_count = int(counts['a_internal_records']) + int(counts['na_internal_records']) + int(
             counts['null_phone']) + int(counts['contact_no_lead']) + int(counts['left_dead']) + int(
             counts['a_converted']) + int(counts['na_converted']) + int(counts['updated_leads']) + int(
-            counts['as_requested'])
-        tk.Label(win, text=f"total: {sfdc_total_count}").grid(column=0, row=9, sticky=tk.W, padx=5)
+            counts['as_requested']) + int(counts['sf_excluded'])
+        tk.Label(win, text=f"total: {sfdc_total_count}").grid(column=0, row=10, sticky=tk.W, padx=5)
         tk.Label(win, text=f"variance: {sfdc_total_count - counts['a_initial_count'] - counts['na_initial_count']}") \
-            .grid(column=0, row=10, sticky=tk.W, padx=5)
+            .grid(column=0, row=11, sticky=tk.W, padx=5)
 
         # udb counts
         tk.Label(win, text="UDB").grid(column=1, row=2)
