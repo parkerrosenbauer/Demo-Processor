@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bb9f61ca-017d-495e-9892-a7b187eb4114" name="Changes" comment="Removing references to sync field and changing the pivot table to use lead source field instead">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file_processing/archive_helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/file_processing/archive_helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
