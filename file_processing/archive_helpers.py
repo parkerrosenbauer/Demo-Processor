@@ -70,15 +70,19 @@ def udb_counts(demo_obj: demo.Demo) -> None:
     a_exclude = exclude[exclude["TrackingCode"].str.contains("AC")]
     a_ms_count = len(a_exclude[a_exclude["MasterSuppression"].notnull()])
     a_iaf_count = len(a_exclude[a_exclude["IsActiveFalse"].notnull()])
+    a_hb_count = len(a_exclude[a_exclude["HardBounce"].notnull()])
     na_exclude = exclude[exclude["TrackingCode"].str.contains("BC")]
     na_ms_count = len(na_exclude[na_exclude["MasterSuppression"].notnull()])
     na_iaf_count = len(na_exclude[na_exclude["IsActiveFalse"].notnull()])
+    na_hb_count = len(na_exclude[na_exclude["HardBounce"].notnull()])
 
     demo_obj.counts.update_counts(attendee_count=udb[0],
                                   nonattendee_count=udb[1],
                                   a_mastersupp=a_ms_count,
                                   na_mastersupp=na_ms_count,
                                   a_activefalse=a_iaf_count,
-                                  na_activefalse=na_iaf_count)
+                                  na_activefalse=na_iaf_count,
+                                  a_hardbounce=a_hb_count,
+                                  na_hardbounce=na_hb_count)
 
 
