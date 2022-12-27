@@ -2,9 +2,7 @@ from __future__ import annotations
 import json
 import datetime
 from logs.log import logger
-import file_processing.file_paths as const
-
-VALIDATION_COUNTS = const.VALIDATION_COUNTS
+import file_processing.file_paths as demo_paths
 
 
 class Validation:
@@ -24,7 +22,7 @@ class Validation:
         :return: None
         :rtype: None
         """
-        with open(VALIDATION_COUNTS, 'r+') as file:
+        with open(demo_paths.VALIDATION_COUNTS, 'r+') as file:
             counts = json.load(file)
 
             for item, value in kwargs.items():
@@ -46,7 +44,7 @@ class Validation:
         :return: variable value
         :rtype: int | dict | list
         """
-        with open(VALIDATION_COUNTS, 'r') as file:
+        with open(demo_paths.VALIDATION_COUNTS, 'r') as file:
             counts = json.loads(file.read())
         return counts[self.idx][item]
 
@@ -56,6 +54,6 @@ class Validation:
         :return: dictionary of all variables
         :rtype: dict
         """
-        with open(VALIDATION_COUNTS, 'r') as file:
+        with open(demo_paths.VALIDATION_COUNTS, 'r') as file:
             counts = json.loads(file.read())
         return counts[self.idx]

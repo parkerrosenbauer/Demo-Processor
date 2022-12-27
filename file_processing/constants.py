@@ -1,12 +1,9 @@
 import os
 import re
 import json
+import file_processing.file_paths as demo_paths
 
-parent_directory = os.path.dirname(os.path.abspath(__file__))
-parent_directory = re.sub('\\\\file_processing', '', parent_directory)
-SETTINGS_PATH = os.path.join(parent_directory, 'data', 'settings.json')
-
-with open(SETTINGS_PATH, 'r') as file:
+with open(demo_paths.SETTINGS_PATH, 'r') as file:
     settings = json.load(file)
 
 ACCESS_PATH = settings["Access Database Path"]

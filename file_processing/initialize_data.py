@@ -1,6 +1,6 @@
 import json
 import file_processing.demo as demo
-import file_processing.validation as v
+import file_processing.file_paths as demo_paths
 
 
 def initialize() -> None:
@@ -66,5 +66,5 @@ def initialize() -> None:
         idx: data
         for idx in demo_id
     }
-    with open(v.VALIDATION_COUNTS, 'w') as file:
+    with open(demo_paths.VALIDATION_COUNTS, 'w') as file:
         json.dump(count_dicts, file)
