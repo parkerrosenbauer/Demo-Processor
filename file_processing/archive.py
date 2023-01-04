@@ -39,10 +39,16 @@ class ArchiveMgr:
         del new_data
         self.raw = None
 
-    def append_sfdc(self):
+    def append_sfdc(self, new_ids: pd.DataFrame) -> None:
         """"""
         self.sfdc = pd.read_excel(ARCHIVE_PATH, sheet_name=SFDC_SHEET)
         new_data = pd.read_excel(self.demo.sf_path, sheet_name=self.demo.sf_upload)
+
+        # match new sf data to new_ids
+        new_data = pd.merge(new_data, new_ids, how="left", on=["Email"])
+        new_data.fillna('')
+        new_data.loc[new_data["Existing Lead ID"] == '', "Existing Lead ID"] = new_data["SFDC ID (18 digit)"]
+
         new_data = new_data[list(set(self.sfdc.columns) & set(new_data.columns))]
         new_data["Date"] = self.demo.demo_date
         new_data["Type"] = "HC Demo"
@@ -54,7 +60,7 @@ class ArchiveMgr:
         del new_data
         self.sfdc = None
 
-    def append_udb(self):
+    def append_udb(self) -> None:
         """"""
         self.udb = pd.read_excel(ARCHIVE_PATH, sheet_name=UDB_SHEET)
         new_data = pd.read_excel(self.demo.udb_path, sheet_name=self.demo.udb_upload)
@@ -69,7 +75,7 @@ class ArchiveMgr:
         del new_data
         self.udb = None
 
-    def append_counts(self):
+    def append_counts(self) -> None:
         """"""
         self.counts = pd.read_excel(ARCHIVE_PATH, sheet_name=COUNTS_SHEET)
         demo_counts = self.demo.counts

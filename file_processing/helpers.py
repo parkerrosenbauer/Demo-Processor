@@ -469,7 +469,7 @@ def udb_post_val(demo_obj: demo.Demo) -> None:
 
 
 # --------------------- VALIDATION COUNTS --------------------- #
-def validation_counts(demo_obj: demo.Demo) -> None:
+def validation_counts(demo_obj: demo.Demo) -> pd.DataFrame:
     """Find counts after sfdc records upload.
 
     :param demo_obj: current demo object
@@ -486,7 +486,7 @@ def validation_counts(demo_obj: demo.Demo) -> None:
     upload = pd.read_excel(demo_obj.sf_path, sheet_name=demo_obj.sf_upload)
 
     valid = pd.merge(validation, upload, how="left", left_on=["Last Name", "Email"], right_on=["LastName", "Email"])
-    valid = valid[["Stage", "Converted Date", "Lead Owner", "AG", "SFDC ID (18 digit)", "Tracking Code"]]
+    valid = valid[["Stage", "Converted Date", "Lead Owner", "AG", "SFDC ID (18 digit)", "Tracking Code", "Email"]]
     valid = valid[valid["Lead Owner"].notnull()]
     valid.drop_duplicates(subset=["SFDC ID (18 digit)"], inplace=True)
 
@@ -525,7 +525,9 @@ def validation_counts(demo_obj: demo.Demo) -> None:
                                   tmnonattendee_code=demo_obj.sf_non_attend,
                                   tmnonattendee_count=nonattendee_count,
                                   total=total_count,
-                                  converted=a_convert+na_convert)
+                                  converted=a_convert + na_convert)
+
+    return valid
 
 
 # --------------------- GENERATE EMAIL --------------------- #

@@ -69,6 +69,7 @@ class DemoFrame(tk.Frame):
 
         self.demo_obj = None
         self.demo_obj_type = None
+        self.new_id_data = None
         self.archive_obj = None
 
     def create_demo(self, event) -> None:
@@ -270,7 +271,7 @@ class DemoFrame(tk.Frame):
         :rtype: None
         """
         try:
-            demo_f.validation_counts(self.demo_obj)
+            self.new_id_data = demo_f.validation_counts(self.demo_obj)
         except Exception as e:
             messagebox.showerror("Validation Error", str(e))
             logger.error("Validation Error %s", repr(e))
@@ -336,25 +337,25 @@ class DemoFrame(tk.Frame):
         :rtype: None
         """
         # archive raw data
-        try:
-            self.archive_obj.append_raw()
-        except Exception as e:
-            if "Permission" in str(e):
-                messagebox.showerror("Archive Error", "The UDB Validation Archive file is open. Ensure the file is "
-                                                      "closed by all users, then run again.")
-            else:
-                messagebox.showerror("Archive Error", f"There was an error archiving the raw data:\n\n{str(e)}")
-
-            logger.error("Archive Error %s", repr(e))
-            return
+        # try:
+        #     self.archive_obj.append_raw()
+        # except Exception as e:
+        #     if "Permission" in str(e):
+        #         messagebox.showerror("Archive Error", "The UDB Validation Archive file is open. Ensure the file is "
+        #                                               "closed by all users, then run again.")
+        #     else:
+        #         messagebox.showerror("Archive Error", f"There was an error archiving the raw data:\n\n{str(e)}")
+        #
+        #     logger.error("Archive Error %s", repr(e))
+        #     return
 
         # archive sfdc upload
-        try:
-            self.archive_obj.append_sfdc()
-        except Exception as e:
-            messagebox.showerror("Archive Error", f"There was an error archiving the sfdc upload data:\n\n{str(e)}")
-            logger.error("Archive Error %s", repr(e))
-            return
+        # try:
+        self.archive_obj.append_sfdc(self.new_id_data)
+        # except Exception as e:
+        #     messagebox.showerror("Archive Error", f"There was an error archiving the sfdc upload data:\n\n{str(e)}")
+        #     logger.error("Archive Error %s", repr(e))
+        #     return
 
         # archive udb upload
         try:
