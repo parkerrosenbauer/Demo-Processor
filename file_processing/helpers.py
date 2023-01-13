@@ -495,16 +495,6 @@ def validation_counts(demo_obj: demo.Demo) -> pd.DataFrame:
     requested_records = len((valid[(valid["AG"] != "Active") & (valid["Converted Date"].isnull()) &
                                    (valid["Stage"].isnull())]["Lead Owner"]))
 
-    assignment = list(valid.AG.unique())
-    assignment = [str(x) for x in assignment]
-    if "nan" in assignment:
-        assignment.remove("nan")
-    assignment = sorted(assignment, reverse=True)[0]
-    if "BDR" in assignment:
-        assignment = assignment.split()[0]
-    else:
-        assignment += " by territory"
-
     # tracking code counts
     nc_validation = valid[(valid["Converted Date"].isnull()) & (valid["Stage"].isnull())]
     attendee_count = len(nc_validation[nc_validation["Tracking Code"].str.contains("AC")])
@@ -519,7 +509,6 @@ def validation_counts(demo_obj: demo.Demo) -> pd.DataFrame:
                                   na_converted=na_convert,
                                   updated_leads=str(updated_records),
                                   as_requested=str(requested_records),
-                                  requested_assign=assignment,
                                   tmattendee_code=demo_obj.sf_attend,
                                   tmattendee_count=attendee_count,
                                   tmnonattendee_code=demo_obj.sf_non_attend,

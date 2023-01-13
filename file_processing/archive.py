@@ -46,7 +46,7 @@ class ArchiveMgr:
 
         # match new sf data to new_ids
         new_data = pd.merge(new_data, new_ids, how="left", on=["Email"])
-        new_data.fillna('')
+        new_data = new_data.fillna('')
         new_data.loc[new_data["Existing Lead ID"] == '', "Existing Lead ID"] = new_data["SFDC ID (18 digit)"]
 
         new_data = new_data[list(set(self.sfdc.columns) & set(new_data.columns))]
