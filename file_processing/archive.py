@@ -103,6 +103,7 @@ class ArchiveMgr:
             "Null_Phone": demo_counts.retrieve_one("a_null_phone"),
             "Merged": demo_counts.retrieve_one("a_merged"),
             "BadEmail": demo_counts.retrieve_one("a_bad_email"),
+            "FreshAddressBadEmail": demo_counts.retrieve_one("a_freshaddressbademail"),
         }
         nonattendee_counts = {
             "Date": self.demo.demo_date,
@@ -128,6 +129,7 @@ class ArchiveMgr:
             "Null_Phone": demo_counts.retrieve_one("na_null_phone"),
             "Merged": demo_counts.retrieve_one("na_merged"),
             "BadEmail": demo_counts.retrieve_one("na_bad_email"),
+            "FreshAddressBadEmail": demo_counts.retrieve_one("na_freshaddressbademail"),
         }
         attendee_data = pd.DataFrame(attendee_counts, index=[0])
         nonattendee_data = pd.DataFrame(nonattendee_counts, index=[0])
