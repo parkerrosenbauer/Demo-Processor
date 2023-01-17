@@ -6,6 +6,7 @@ from logs.log import logger
 import file_processing.demo as demo
 import file_processing.constants as demo_c
 import file_processing.file_paths as const
+import file_processing.archive_helpers as demo_a
 
 pd.io.formats.excel.ExcelFormatter.header_style = None
 
@@ -307,10 +308,20 @@ def udb_pre_val(demo_obj: demo.Demo) -> None:
     # update validation counts
     exclude = pd.read_excel(demo_obj.exclude_path, sheet_name=demo_obj.udb_exclude)
 
+    # FreshAddressBadEmail:
+    attendee_bad_email = len(udb[(udb["TrackingCode"].str.contains("AC")) & (udb["FreshAddressBadEmail"] == "Y")])
+    nonattendee_bad_email = len(udb[(udb["TrackingCode"].str.contains("BC")) & (udb["FreshAddressBadEmail"] == "Y")])
+    attendee_invalid_email = len(udb[(udb["TrackingCode"].str.contains("AC")) & (udb["EmailValidation"] == "FALSE")])
+    nonattendee_invalid_email = len(udb[(udb["TrackingCode"].str.contains("BC")) & (udb["EmailValidation"] == "FALSE")])
+
     demo_obj.counts.update_counts(attendee_code=demo_obj.udb_attend,
                                   nonattendee_code=demo_obj.udb_non_attend,
                                   udb_excluded=len(exclude),
-                                  udb_uploaded=len(udb))
+                                  udb_uploaded=len(udb),
+                                  a_freshaddressbademail=attendee_bad_email,
+                                  na_freshaddressbademail=nonattendee_bad_email,
+                                  a_bad_email=attendee_invalid_email,
+                                  na_bad_email=nonattendee_invalid_email)
 
     # save the Excel file
     with pd.ExcelWriter(demo_obj.udb_path, engine='openpyxl', mode='w') as writer:
