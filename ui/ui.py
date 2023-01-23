@@ -9,6 +9,7 @@ from datetime import datetime
 import file_processing.demo as demo
 import file_processing.helpers as demo_f
 import file_processing.constants as demo_c
+import file_processing.file_paths as demo_p
 import file_processing.archive_helpers as demo_a
 from file_processing.archive import ArchiveMgr
 from file_processing.initialize_data import initialize
@@ -408,7 +409,7 @@ class DemoMenu(tk.Menu):
         new = tk.Toplevel(self.parent)
         new.title("Settings")
         new.config(pady=10, padx=10)
-        with open(demo_c.SETTINGS_PATH, 'r') as file:
+        with open(demo_p.SETTINGS_PATH, 'r') as file:
             settings = json.load(file)
         entries = {}
 
@@ -420,7 +421,7 @@ class DemoMenu(tk.Menu):
             if sure == 'yes':
                 for config, entry_box in entries.items():
                     settings[config] = entry_box.get()
-                with open(demo_c.SETTINGS_PATH, 'w') as new_file:
+                with open(demo_p.SETTINGS_PATH, 'w') as new_file:
                     json.dump(settings, new_file)
 
         for idx, (setting, value) in enumerate(settings.items()):
