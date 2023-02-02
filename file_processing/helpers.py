@@ -309,8 +309,26 @@ def udb_pre_val(demo_obj: demo.Demo) -> None:
     exclude = pd.read_excel(demo_obj.exclude_path, sheet_name=demo_obj.udb_exclude)
 
     # FreshAddressBadEmail:
-    attendee_bad_email = len(udb[(udb["TrackingCode"].str.contains("AC")) & (udb["FreshAddressBadEmail"] == "Y")])
-    nonattendee_bad_email = len(udb[(udb["TrackingCode"].str.contains("BC")) & (udb["FreshAddressBadEmail"] == "Y")])
+    a_upload_bademail = len(udb[(udb["TrackingCode"].str.contains("AC")) & (udb["FreshAddressBadEmail"] == "Y")])
+    na_upload_bademail = len(udb[(udb["TrackingCode"].str.contains("BC")) & (udb["FreshAddressBadEmail"] == "Y")])
+    a_exclude_bademail = len(exclude[(exclude["TrackingCode"].str.contains("AC")) &
+                                     (exclude["FreshAddressBadEmail"] == "Y")])
+    na_exclude_bademail = len(exclude[(exclude["TrackingCode"].str.contains("BC")) &
+                                      (exclude["FreshAddressBadEmail"] == "Y")])
+    attendee_bad_email = a_upload_bademail + a_exclude_bademail
+    nonattendee_bad_email = na_upload_bademail + na_exclude_bademail
+
+    # Undeliverable
+    a_upload_undeliverable = len(udb[(udb["TrackingCode"].str.contains("AC")) & (udb["Undeliverable"] == "Y")])
+    na_upload_undeliverable = len(udb[(udb["TrackingCode"].str.contains("BC")) & (udb["Undeliverable"] == "Y")])
+    a_exclude_undeliverable = len(exclude[(exclude["TrackingCode"].str.contains("AC")) &
+                                          (exclude["Undeliverable"] == "Y")])
+    na_exclude_undeliverable = len(exclude[(exclude["TrackingCode"].str.contains("BC")) &
+                                           (exclude["Undeliverable"] == "Y")])
+    attendee_undeliverable = a_upload_undeliverable + a_exclude_undeliverable
+    nonattendee_undeliverable = na_upload_undeliverable + na_exclude_undeliverable
+
+    # BadEmail
     attendee_invalid_email = len(udb[(udb["TrackingCode"].str.contains("AC")) & (udb["EmailValidation"] == "FALSE")])
     nonattendee_invalid_email = len(udb[(udb["TrackingCode"].str.contains("BC")) & (udb["EmailValidation"] == "FALSE")])
 
@@ -321,7 +339,9 @@ def udb_pre_val(demo_obj: demo.Demo) -> None:
                                   a_freshaddressbademail=attendee_bad_email,
                                   na_freshaddressbademail=nonattendee_bad_email,
                                   a_bad_email=attendee_invalid_email,
-                                  na_bad_email=nonattendee_invalid_email)
+                                  na_bad_email=nonattendee_invalid_email,
+                                  a_undeliverable=attendee_undeliverable,
+                                  na_undeliverable=nonattendee_undeliverable)
 
     # save the Excel file
     with pd.ExcelWriter(demo_obj.udb_path, engine='openpyxl', mode='w') as writer:
@@ -397,7 +417,8 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
     # remove necessary columns for upload
     # new
     new_cols = ['Existing Lead ID', 'Existing Contact ID', 'Domain', 'AG', 'Current Secondary Description',
-                'Dead Reason']
+                'Dead Reason', 'LastNameValidation', 'FirstNameValidation', 'EmailValidation', 'CompanyValidation',
+                'TitleValidation']
     for col in new_cols:
         try:
             new = new.drop([col], axis=1)
@@ -408,7 +429,8 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
         new = new.drop(['PhoneExt'], axis=1)
 
     # lead update
-    lead_cols = ['Existing Contact ID', 'Domain', 'AG', 'Dead Reason', 'Existing Lead Company']
+    lead_cols = ['Existing Contact ID', 'Domain', 'AG', 'Dead Reason', 'Existing Lead Compnay', 'LastNameValidation',
+                 'FirstNameValidation', 'EmailValidation', 'CompanyValidation', 'TitleValidation']
     for col in lead_cols:
         try:
             lead_update = lead_update.drop([col], axis=1)
@@ -420,9 +442,10 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
 
     # contact update
     contact_cols = ['Existing Lead ID', 'LastName', 'FirstName', 'Email', 'Domain', 'State', 'PhoneNumber', 'Company',
-                    'Existing Lead Company', 'CustomerTitle', 'AG', 'Record Type ID', 'LeadSource',
+                    'Existing Lead Compnay', 'CustomerTitle', 'AG', 'Record Type ID', 'LeadSource',
                     'Current Lead Status', 'Dead Reason', 'EmailValidation', 'Current Owner', 'Current Owner ID',
-                    'Dead Reason', 'PhoneExt']
+                    'Dead Reason', 'PhoneExt', 'LastNameValidation', 'FirstNameValidation', 'EmailValidation',
+                    'CompanyValidation', 'TitleValidation']
     for col in contact_cols:
         try:
             contact_update = contact_update.drop([col], axis=1)

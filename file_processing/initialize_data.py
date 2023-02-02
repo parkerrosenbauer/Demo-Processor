@@ -57,7 +57,9 @@ def initialize() -> None:
         "a_hardbounce": 0,
         "na_hardbounce": 0,
         "a_freshaddressbademail": 0,
-        "na_freshaddressbademail": 0.
+        "na_freshaddressbademail": 0,
+        "a_undeliverable": 0,
+        "na_undeliverable": 0,
     }
     demo_id = [
         f"{row['Demo Type']} ({row['Webinar Date']})"

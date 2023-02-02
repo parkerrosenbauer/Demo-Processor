@@ -105,6 +105,7 @@ class ArchiveMgr:
             "BadEmail": demo_counts.retrieve_one("a_bad_email"),
             "FreshAddressBadEmail": demo_counts.retrieve_one("a_freshaddressbademail"),
             "Duplicates": 0,
+            "Undeliverable": demo_counts.retrieve_one("a_undeliverable"),
         }
         nonattendee_counts = {
             "Date": self.demo.demo_date,
@@ -132,6 +133,7 @@ class ArchiveMgr:
             "BadEmail": demo_counts.retrieve_one("na_bad_email"),
             "FreshAddressBadEmail": demo_counts.retrieve_one("na_freshaddressbademail"),
             "Duplicates": 0,
+            "Undeliverable": demo_counts.retrieve_one("na_undeliverable"),
         }
         attendee_data = pd.DataFrame(attendee_counts, index=[0])
         nonattendee_data = pd.DataFrame(nonattendee_counts, index=[0])
