@@ -490,6 +490,14 @@ def udb_post_val(demo_obj: demo.Demo) -> None:
     udb = pd.read_excel(demo_obj.udb_path, sheet_name=demo_obj.udb_upload)
     udb = udb.fillna('')
 
+    udb_cols = ['EmailValidation', 'Current Owner', 'Current Owner ID', 'LastNameValidation', 'FirstNameValidation',
+                'EmailValidation', 'CompanyValidation', 'TitleValidation']
+    for col in udb_cols:
+        try:
+            udb = udb.drop([col], axis=1)
+        except KeyError:
+            logger.info('%s missing from UDB', col)
+
     review_count = (udb["Company"].str.contains("REVIEW")).sum()
     if review_count > 0:
         logger.warning("Data may not have been manually reviewed, REVIEW found in Company column")
