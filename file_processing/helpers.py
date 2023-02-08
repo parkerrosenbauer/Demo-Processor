@@ -136,7 +136,6 @@ def sfdc_pre_val(demo_obj: demo.Demo) -> None:
     # if the master company name is left blank, the existing company name will be marked with review needed
     sfdc.loc[sfdc["Master Name"] != '', 'Company'] = sfdc['Master Name']
     sfdc.loc[sfdc["Master Name"] == '', 'Company'] = 'REVIEW ' + sfdc.Company
-    sfdc = sfdc.drop(['Master Name'], axis=1)
 
     # cleans the secondary description of duplicates
     def uniquify(string, splitter=" "):
@@ -188,8 +187,7 @@ def sfdc_pre_val(demo_obj: demo.Demo) -> None:
     dfs = [sfdc, null_phone, dead, cnl]
     for df in dfs:
         df.drop(["Prior Marketing Note", "Prior Sales Note", "Prior Description", "Prior Secondary Description",
-                 "Prior Lead Status",
-                 "LastActivityDate", "Existing Lead Owner", "Existing Lead Owner ID", "ID"], axis=1, inplace=True)
+                 "Prior Lead Status", "Existing Lead Owner", "Existing Lead Owner ID", "ID"], axis=1, inplace=True)
 
     # counts any excluded sf leads
     try:
@@ -418,7 +416,7 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
     # new
     new_cols = ['Existing Lead ID', 'Existing Contact ID', 'Domain', 'AG', 'Current Secondary Description',
                 'Dead Reason', 'LastNameValidation', 'FirstNameValidation', 'EmailValidation', 'CompanyValidation',
-                'TitleValidation']
+                'TitleValidation', 'Master Name', 'LastActiveDate']
     for col in new_cols:
         try:
             new = new.drop([col], axis=1)
@@ -430,7 +428,8 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
 
     # lead update
     lead_cols = ['Existing Contact ID', 'Domain', 'AG', 'Dead Reason', 'Existing Lead Compnay', 'LastNameValidation',
-                 'FirstNameValidation', 'EmailValidation', 'CompanyValidation', 'TitleValidation']
+                 'FirstNameValidation', 'EmailValidation', 'CompanyValidation', 'TitleValidation', 'Master Name',
+                 'LastActiveDate']
     for col in lead_cols:
         try:
             lead_update = lead_update.drop([col], axis=1)
@@ -445,7 +444,7 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
                     'Existing Lead Compnay', 'CustomerTitle', 'AG', 'Record Type ID', 'LeadSource',
                     'Current Lead Status', 'Dead Reason', 'EmailValidation', 'Current Owner', 'Current Owner ID',
                     'Dead Reason', 'PhoneExt', 'LastNameValidation', 'FirstNameValidation', 'EmailValidation',
-                    'CompanyValidation', 'TitleValidation']
+                    'CompanyValidation', 'TitleValidation', 'Master Name', 'LastActiveDate', 'Country']
     for col in contact_cols:
         try:
             contact_update = contact_update.drop([col], axis=1)
