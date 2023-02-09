@@ -49,6 +49,9 @@ class ArchiveMgr:
         new_data = new_data.fillna('')
         new_data.loc[new_data["Existing Lead ID"] == '', "Existing Lead ID"] = new_data["SFDC ID (18 digit)"]
 
+        if "AG_x" in new_data.columns:
+            new_data = new_data.rename(columns={"AG_x": "AG"})
+
         new_data = new_data[list(set(self.sfdc.columns) & set(new_data.columns))]
         new_data["Date"] = self.demo.demo_date
         new_data["Type"] = "HC Demo"
