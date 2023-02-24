@@ -491,7 +491,7 @@ def udb_post_val(demo_obj: demo.Demo) -> None:
     udb = udb.fillna('')
 
     udb_cols = ['EmailValidation', 'Current Owner', 'Current Owner ID', 'LastNameValidation', 'FirstNameValidation',
-                'EmailValidation', 'CompanyValidation', 'TitleValidation']
+                'EmailValidation', 'CompanyValidation', 'TitleValidation', 'Master Name']
     for col in udb_cols:
         try:
             udb = udb.drop([col], axis=1)
