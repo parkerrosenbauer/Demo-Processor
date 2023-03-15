@@ -416,7 +416,7 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
     # new
     new_cols = ['Existing Lead ID', 'Existing Contact ID', 'Domain', 'AG', 'Current Secondary Description',
                 'Dead Reason', 'LastNameValidation', 'FirstNameValidation', 'EmailValidation', 'CompanyValidation',
-                'TitleValidation', 'Master Name', 'LastActivyDate', 'Existing Lead Compnay']
+                'TitleValidation', 'Master Name', 'LastActivityDate', 'Existing Lead Compnay']
     for col in new_cols:
         try:
             new = new.drop([col], axis=1)
@@ -429,7 +429,7 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
     # lead update
     lead_cols = ['Existing Contact ID', 'Domain', 'AG', 'Dead Reason', 'Existing Lead Compnay', 'LastNameValidation',
                  'FirstNameValidation', 'EmailValidation', 'CompanyValidation', 'TitleValidation', 'Master Name',
-                 'LastActivyDate']
+                 'LastActivityDate']
     for col in lead_cols:
         try:
             lead_update = lead_update.drop([col], axis=1)
@@ -444,7 +444,7 @@ def sfdc_post_val(demo_obj: demo.Demo) -> None:
                     'Existing Lead Compnay', 'CustomerTitle', 'AG', 'Record Type ID', 'LeadSource',
                     'Current Lead Status', 'Dead Reason', 'EmailValidation', 'Current Owner', 'Current Owner ID',
                     'Dead Reason', 'PhoneExt', 'LastNameValidation', 'FirstNameValidation', 'EmailValidation',
-                    'CompanyValidation', 'TitleValidation', 'Master Name', 'LastActivyDate', 'Country']
+                    'CompanyValidation', 'TitleValidation', 'Master Name', 'LastActivityDate', 'Country']
     for col in contact_cols:
         try:
             contact_update = contact_update.drop([col], axis=1)
