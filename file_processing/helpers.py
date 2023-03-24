@@ -291,8 +291,9 @@ def udb_pre_val(demo_obj: demo.Demo) -> None:
     elif (udb['PhoneExt'] == '').all():
         udb = udb.drop(['PhoneExt'], axis=1)
 
-    # remove [Unknown] from file
+    # remove [Unknown] and Individual from file
     udb = udb.replace(to_replace=r"[Unknown]", value="")
+    udb['Company'] = udb['Company'].str.replace('Individual', '')
 
     # remove / from title field
     udb.CustomerTitle = udb.CustomerTitle.replace(to_replace='\/', value=' ', regex=True)
